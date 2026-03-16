@@ -1,8 +1,16 @@
-cmake_minimum_required(version 3.5)
-project(ASCII_DRAWER)
+CXX= g++
+CXXFLAGS = -std=c++17
 
-find_package(OPENCV REQUIRED)
-include_directories({$OpenCV_INCLUDE_DIRS})
-add_executable(image_to_ascii.cpp)
-target_include_directories() //TODO Finish this
+TARGET = ascii_drawer
+SRC = image_to_ascii.cpp
+
+OPENCV_CFLAGS := $(shell pkg-config --cflags opencv4)
+OPENCV_LIBS := $(shell pkg-config --libs opencv4)
+
+all:
+  $(CXX) $(CXXFLAGS) $SRC) -o $(TARGET) $(OPENCV_CFLAGS) $(OPENCV_LIBS)
+
+clean:
+  rm -f $(TARGET)
+
 
