@@ -1,5 +1,4 @@
 #include <iostream>
-#include "png_to_ascii.h"
 #include <fstream>
 #include <string.h>
 #include <opencv2/opencv.hpp>
@@ -81,6 +80,10 @@ int main(int argc, char* argv[])
     std::string asciiCharList;
     std::ofstream outfile(asciipathname);
     Mat hsv_image;
+    int targetWidth = 150;
+    float aspectRatio = static_cast<float>(image.rows)/image.cols;
+    int targetHeight = targetWidth * aspectRatio * 0.5;
+    resize(image, image, Size(targetWidth, targetHeight));
     cvtColor(image, hsv_image, COLOR_BGR2HSV);
     for(int i=0; i < hsv_image.rows; i++)
     {
